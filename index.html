@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المنظومة الرقمية لمدارس الريادة - TaRL</title>
+    <!-- مكتبات خارجية -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <!-- ربط ملف الـ CSS الخاص بك -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="text-slate-100 min-h-screen p-4 md:p-8">
+
+    <div class="max-w-6xl container mx-auto">
+        <!-- [ضع هنا محتوى الـ HTML الخاص بواجهتك الذي أرسلته سابقاً داخل هذا القسم] -->
+        <!-- تذكر التأكد من وجود الـ id="dashboardArea" والـ buttons كما هي -->
+        <div class="text-center mb-10">
+            <h1 class="text-3xl md:text-4xl font-extrabold text-blue-400 mt-3">النظام الذكي المؤتمت لـ TaRL</h1>
+        </div>
+        
+        <!-- واجهة رفع الملفات -->
+        <div class="bg-slate-800/50 backdrop-blur-md border border-slate-700/50 rounded-2xl p-6 mb-8">
+            <button onclick="processRealFiles()" class="bg-blue-600 px-8 py-3 rounded-xl">⚡ معالجة البيانات</button>
+        </div>
+
+        <div id="dashboardArea" class="hidden">
+            <!-- (بقية محتوى لوحة التحكم الخاص بك) -->
+        </div>
+    </div>
+
+    <!-- ربط ملف الجافا سكريبت الخاص بك -->
+    <script src="app.js"></script>
+</body>
+</html>

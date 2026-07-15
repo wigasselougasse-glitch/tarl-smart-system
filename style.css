@@ -1,0 +1,13 @@
+/* التنسيق الأساسي للجسم */
+body { 
+    background: radial-gradient(circle at top, #1e293b, #0f172a); 
+    min-height: 100vh;
+}
+
+/* تنسيقات إضافية يمكن إضافتها لاحقاً لترتيب العناصر */
+.dashboard-card {
+    background: rgba(30, 41, 59, 0.4);
+    border: 1px solid rgba(51, 65, 85, 0.3);
+    border-radius: 12px;
+    padding: 20px;
+}
