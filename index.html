@@ -5,6 +5,7 @@
     <title>النظام الذكي</title>
     <!-- استدعاء مكتبة Supabase -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>alert("تم تحميل الصفحة بنجاح!");</script>
 </head>
 <body>
     <h2>إدخال بيانات التلميذ</h2>
@@ -12,38 +13,41 @@
     <input type="text" id="massar_id" placeholder="رقم مسار">
     <input type="number" id="arabic_score" placeholder="نقطة العربية">
     <input type="number" id="math_score" placeholder="نقطة الرياضيات">
-    <button id="save_btn">حفظ البيانات</button>
+    <button id="save_btn" onclick="runScript()">حفظ البيانات</button>
 
     <script>
-        // إعداد Supabase
-        const SUPABASE_URL = 'https://cazzykxjlddvirploffn.supabase.co';
-        const SUPABASE_KEY = 'sb_publishable_l3GVD4AEkg1oW9KZD70xew_doUtcZF9';
-        const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+        async function runScript() {
+            alert("تم الضغط على الزر!"); 
+            
+            try {
+                // إعداد Supabase
+                const SUPABASE_URL = 'https://cazzykxjlddvirploffn.supabase.co';
+                const SUPABASE_KEY = 'sb_publishable_l3GVD4AEkg1oW9KZD70xew_doUtcZF9';
+                const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-        // إضافة حدث عند الضغط على الزر
-        document.getElementById('save_btn').addEventListener('click', async () => {
-            alert("تم الضغط على الزر!"); // رسالة اختبار
+                const name = document.getElementById('student_name').value;
+                const massar = document.getElementById('massar_id').value;
+                const arabic = document.getElementById('arabic_score').value;
+                const math = document.getElementById('math_score').value;
 
-            const name = document.getElementById('student_name').value;
-            const massar = document.getElementById('massar_id').value;
-            const arabic = document.getElementById('arabic_score').value;
-            const math = document.getElementById('math_score').value;
+                const { data, error } = await supabase
+                    .from('students')
+                    .insert([{ 
+                        student_name: name, 
+                        massar_id: massar, 
+                        arabic_score: arabic, 
+                        math_score: math 
+                    }]);
 
-            const { data, error } = await supabase
-                .from('students')
-                .insert([{ 
-                    student_name: name, 
-                    massar_id: massar, 
-                    arabic_score: arabic, 
-                    math_score: math 
-                }]);
-
-            if (error) {
-                alert("خطأ: " + error.message);
-            } else {
-                alert("تم الحفظ بنجاح!");
+                if (error) {
+                    alert("خطأ في قاعدة البيانات: " + error.message);
+                } else {
+                    alert("تم الحفظ بنجاح!");
+                }
+            } catch (err) {
+                alert("خطأ برمجي: " + err.message);
             }
-        });
+        }
     </script>
 </body>
 </html>
