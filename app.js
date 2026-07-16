@@ -1,10 +1,11 @@
 async function saveData() {
+    alert("تم الضغط على الزر!"); // <-- هذا السطر سيخبرنا هل الكود يعمل أم لا
+
     const name = document.getElementById('student_name').value;
     const massar = document.getElementById('massar_id').value;
     const arabic = document.getElementById('arabic_score').value;
     const math = document.getElementById('math_score').value;
 
-    // إرسال البيانات
     const { data, error } = await supabase
         .from('students')
         .insert([{ 
@@ -14,13 +15,10 @@ async function saveData() {
             math_score: math 
         }]);
 
-    // إذا حدث خطأ، سيظهر لنا هنا
     if (error) {
-        console.error("خطأ Supabase:", error);
         alert("خطأ: " + error.message);
     } else {
         alert("تم حفظ البيانات بنجاح!");
-        // تفريغ الخانات
         document.getElementById('student_name').value = '';
         document.getElementById('massar_id').value = '';
         document.getElementById('arabic_score').value = '';
