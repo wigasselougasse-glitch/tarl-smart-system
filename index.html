@@ -2,97 +2,48 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>النظام الذكي المؤتمت لـ TaRL</title>
-    <!-- استدعاء مكتبة Supabase الرسمية -->
+    <title>النظام الذكي</title>
+    <!-- استدعاء مكتبة Supabase -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <style>
-        body { 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            background-color: #0f172a; 
-            color: #f8fafc; 
-            margin: 0; 
-            padding: 20px; 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            justify-content: center; 
-            min-height: 100vh;
-        }
-        h1 { 
-            color: #38bdf8; 
-            font-size: 24px; 
-            margin-bottom: 20px; 
-        }
-        .container { 
-            background-color: #1e293b; 
-            padding: 25px; 
-            border-radius: 12px; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3); 
-            width: 100%; 
-            max-width: 400px; 
-            box-sizing: border-box;
-        }
-        h3 { 
-            margin-top: 0; 
-            color: #f1f5f9; 
-            text-align: center; 
-            margin-bottom: 20px;
-        }
-        input { 
-            display: block; 
-            width: 100%; 
-            margin-bottom: 15px; 
-            padding: 12px; 
-            border: 1px solid #334155; 
-            border-radius: 8px; 
-            background-color: #0f172a; 
-            color: white; 
-            font-size: 16px; 
-            box-sizing: border-box;
-        }
-        input:focus { 
-            outline: none; 
-            border-color: #38bdf8; 
-        }
-        button { 
-            width: 100%; 
-            padding: 12px; 
-            background-color: #2563eb; 
-            color: white; 
-            border: none; 
-            border-radius: 8px; 
-            font-size: 16px; 
-            font-weight: bold; 
-            cursor: pointer; 
-            transition: background-color 0.2s;
-        }
-        button:hover { 
-            background-color: #1d4ed8; 
-        }
-        #message { 
-            margin-top: 15px; 
-            text-align: center; 
-            font-weight: bold; 
-            font-size: 15px;
-        }
-    </style>
 </head>
 <body>
+    <h2>إدخال بيانات التلميذ</h2>
+    <input type="text" id="student_name" placeholder="اسم التلميذ">
+    <input type="text" id="massar_id" placeholder="رقم مسار">
+    <input type="number" id="arabic_score" placeholder="نقطة العربية">
+    <input type="number" id="math_score" placeholder="نقطة الرياضيات">
+    <button id="save_btn">حفظ البيانات</button>
 
-    <h1>النظام الذكي المؤتمت لـ TaRL</h1>
-    
-    <div class="container">
-        <h3>إدخال بيانات التلميذ</h3>
-        <input type="text" id="student_name" placeholder="اسم التلميذ">
-        <input type="text" id="massar_id" placeholder="رقم مسار">
-        <input type="number" step="0.01" id="arabic_score" placeholder="نقطة اللغة العربية">
-        <input type="number" step="0.01" id="math_score" placeholder="نقطة الرياضيات">
-        <button onclick="saveData()">حفظ البيانات</button>
-        <p id="message"></p>
-    </div>
+    <script>
+        // إعداد Supabase
+        const SUPABASE_URL = 'https://cazzykxjlddvirploffn.supabase.co';
+        const SUPABASE_KEY = 'sb_publishable_l3GVD4AEkg1oW9KZD70xew_doUtcZF9';
+        const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-    <!-- استدعاء ملف الربط -->
-    <script src="app.js"></script>
+        // إضافة حدث عند الضغط على الزر
+        document.getElementById('save_btn').addEventListener('click', async () => {
+            alert("تم الضغط على الزر!"); // رسالة اختبار
+
+            const name = document.getElementById('student_name').value;
+            const massar = document.getElementById('massar_id').value;
+            const arabic = document.getElementById('arabic_score').value;
+            const math = document.getElementById('math_score').value;
+
+            const { data, error } = await supabase
+                .from('students')
+                .insert([{ 
+                    student_name: name, 
+                    massar_id: massar, 
+                    arabic_score: arabic, 
+                    math_score: math 
+                }]);
+
+            if (error) {
+                alert("خطأ: " + error.message);
+            } else {
+                alert("تم الحفظ بنجاح!");
+            }
+        });
+    </script>
 </body>
 </html>
