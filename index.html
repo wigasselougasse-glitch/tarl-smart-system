@@ -5,7 +5,6 @@
     <title>النظام الذكي</title>
     <!-- استدعاء مكتبة Supabase -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script>alert("تم تحميل الصفحة بنجاح!");</script>
 </head>
 <body>
     <h2>إدخال بيانات التلميذ</h2>
@@ -17,20 +16,21 @@
 
     <script>
         async function runScript() {
-            alert("تم الضغط على الزر!"); 
-            
             try {
-                // إعداد Supabase
+                // إعداد Supabase مع تغيير اسم المتغير لتجنب التعارض
                 const SUPABASE_URL = 'https://cazzykxjlddvirploffn.supabase.co';
                 const SUPABASE_KEY = 'sb_publishable_l3GVD4AEkg1oW9KZD70xew_doUtcZF9';
-                const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+                
+                // استخدام supabase من المكتبة مباشرة لإنشاء العميل
+                const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
                 const name = document.getElementById('student_name').value;
                 const massar = document.getElementById('massar_id').value;
                 const arabic = document.getElementById('arabic_score').value;
                 const math = document.getElementById('math_score').value;
 
-                const { data, error } = await supabase
+                // استخدام supabaseClient للاتصال
+                const { data, error } = await supabaseClient
                     .from('students')
                     .insert([{ 
                         student_name: name, 
