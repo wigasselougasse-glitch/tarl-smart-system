@@ -3,34 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>المنظومة الرقمية لمدارس الريادة - TaRL</title>
-    <!-- مكتبات خارجية -->
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-    <!-- ربط ملف الـ CSS الخاص بك -->
-    <link rel="stylesheet" href="style.css">
+    <title>النظام الذكي المؤتمت لـ TaRL</title>
+    <!-- استدعاء مكتبة Supabase الرسمية -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background-color: #0f172a; 
+            color: #f8fafc; 
+            margin: 0; 
+            padding: 20px; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+            min-height: 100vh;
+        }
+        h1 { 
+            color: #38bdf8; 
+            font-size: 24px; 
+            margin-bottom: 20px; 
+        }
+        .container { 
+            background-color: #1e293b; 
+            padding: 25px; 
+            border-radius: 12px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3); 
+            width: 100%; 
+            max-width: 400px; 
+            box-sizing: border-box;
+        }
+        h3 { 
+            margin-top: 0; 
+            color: #f1f5f9; 
+            text-align: center; 
+            margin-bottom: 20px;
+        }
+        input { 
+            display: block; 
+            width: 100%; 
+            margin-bottom: 15px; 
+            padding: 12px; 
+            border: 1px solid #334155; 
+            border-radius: 8px; 
+            background-color: #0f172a; 
+            color: white; 
+            font-size: 16px; 
+            box-sizing: border-box;
+        }
+        input:focus { 
+            outline: none; 
+            border-color: #38bdf8; 
+        }
+        button { 
+            width: 100%; 
+            padding: 12px; 
+            background-color: #2563eb; 
+            color: white; 
+            border: none; 
+            border-radius: 8px; 
+            font-size: 16px; 
+            font-weight: bold; 
+            cursor: pointer; 
+            transition: background-color 0.2s;
+        }
+        button:hover { 
+            background-color: #1d4ed8; 
+        }
+        #message { 
+            margin-top: 15px; 
+            text-align: center; 
+            font-weight: bold; 
+            font-size: 15px;
+        }
+    </style>
 </head>
-<body class="text-slate-100 min-h-screen p-4 md:p-8">
+<body>
 
-    <div class="max-w-6xl container mx-auto">
-        <!-- [ضع هنا محتوى الـ HTML الخاص بواجهتك الذي أرسلته سابقاً داخل هذا القسم] -->
-        <!-- تذكر التأكد من وجود الـ id="dashboardArea" والـ buttons كما هي -->
-        <div class="text-center mb-10">
-            <h1 class="text-3xl md:text-4xl font-extrabold text-blue-400 mt-3">النظام الذكي المؤتمت لـ TaRL</h1>
-        </div>
-        
-        <!-- واجهة رفع الملفات -->
-        <div class="bg-slate-800/50 backdrop-blur-md border border-slate-700/50 rounded-2xl p-6 mb-8">
-            <button onclick="processRealFiles()" class="bg-blue-600 px-8 py-3 rounded-xl">⚡ معالجة البيانات</button>
-        </div>
-
-        <div id="dashboardArea" class="hidden">
-            <!-- (بقية محتوى لوحة التحكم الخاص بك) -->
-        </div>
+    <h1>النظام الذكي المؤتمت لـ TaRL</h1>
+    
+    <div class="container">
+        <h3>إدخال بيانات التلميذ</h3>
+        <input type="text" id="student_name" placeholder="اسم التلميذ">
+        <input type="text" id="massar_id" placeholder="رقم مسار">
+        <input type="number" step="0.01" id="arabic_score" placeholder="نقطة اللغة العربية">
+        <input type="number" step="0.01" id="math_score" placeholder="نقطة الرياضيات">
+        <button onclick="saveData()">حفظ البيانات</button>
+        <p id="message"></p>
     </div>
 
-    <!-- ربط ملف الجافا سكريبت الخاص بك -->
+    <!-- استدعاء ملف الربط -->
     <script src="app.js"></script>
 </body>
 </html>
